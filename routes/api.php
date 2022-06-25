@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\storeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,12 @@ Route::apiResource('category', CategoryController::class);
  * Peticiones a productos
  */
 Route::apiResource('product', ProductController::class);
+
+/**
+ * Peticiones tienda
+*/
+Route::post('agregarCarrito', [storeController::class, 'store']);
+Route::get('ListCart', [storeController::class, 'index']);
+Route::put('actualizarCantidad/{id}', [storeController::class, 'update']);
+Route::delete('eliminarProductoCarro/{id}', [storeController::class, 'destroy']);
+Route::post('venderProductos', [storeController::class, 'sellProducts']);

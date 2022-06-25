@@ -1,22 +1,39 @@
 @include('layouts.header')
 
-<div class="container row p-3">
-    <div class="col-lg-3 mb-3">
-        <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/defaul.jpg') }}" class="card-img-top p-1" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <div class="row">
-                    <div class="col-md-6">
-                        <input type="number" name="" id="" min="1" value="1" class="form-control" placeholder="1">
-                    </div>
-                    <div class="col-6 text-end">
-                        <a href="#" class="btn btn-primary ">Agregar</a>
-                    </div>
-                </div>
+<div class="container-fluid px-4">
+    <div class="row p-3 productos">
+
+    </div>
+</div>
+
+{{session('carrito')}}
+
+@include('layouts.footer')
+
+<div class="modal fade" id="carrito" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Carrito</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table id="tablaListarCategorias" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="">Nombre</th>
+                            <th class="">cantidad</th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center datos">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-accion btn-primary btn-sm " name="vender">Vender</button>
             </div>
         </div>
     </div>
 </div>
-
-@include('layouts.footer')
