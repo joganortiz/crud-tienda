@@ -62,8 +62,6 @@ class storeController extends Controller
                 }
             }
 
-            $amount_total_car = isset($_SESSION["carrito"]) ? count($_SESSION["carrito"]):0;
-
             #consulta una producto por ID
             $data =  DB::table('products')
                 ->select('id', 'name', 'reference', 'price', 'weight', 'category', 'stock', 'image', 'status')
@@ -78,7 +76,7 @@ class storeController extends Controller
                     $status = 400;
                 }else{
                     $_SESSION["carrito"][$indiceArray]["amount"] = $amount;
-                    $arrResponse = array("mensaje" => "se agrego al carrito el producto", "cantidad" => $amount_total_car);
+                    $arrResponse = array("mensaje" => "se agrego al carrito el producto");
                     $status = 200;
                 }
 
@@ -97,7 +95,7 @@ class storeController extends Controller
                     $status = 400;
                 }else{
                     $_SESSION["carrito"][] = $produCar;
-                    $arrResponse = array("mensaje" => "se agrego al carrito el producto", "cantidad" => $amount_total_car);
+                    $arrResponse = array("mensaje" => "se agrego al carrito el producto");
                     $status = 200;
                 }
 
@@ -183,12 +181,6 @@ class storeController extends Controller
         return $this->helpers->respuestaJson($arrResponse, $status);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function sellProducts(){
         $sales     = uniqid();
         for ($i = 0; $i < count(@$_SESSION["carrito"]); $i++) {
@@ -232,5 +224,12 @@ class storeController extends Controller
         $status = 200;
 
         return $this->helpers->respuestaJson($arrResponse, $status);
+    }
+
+
+    public function countProductCar()
+    {
+        $array = isset($_SESSION["carrito"]) ? count($_SESSION["carrito"]) : 0;;
+        return $this->helpers->respuestaJson($array, 200);
     }
 }

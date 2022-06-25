@@ -39,3 +39,4 @@ Route::get('ListCart', [storeController::class, 'index']);
 Route::put('actualizarCantidad/{id}', [storeController::class, 'update']);
 Route::delete('eliminarProductoCarro/{id}', [storeController::class, 'destroy']);
 Route::post('venderProductos', [storeController::class, 'sellProducts']);
+Route::get('countProductCar', [storeController::class, 'countProductCar']);
