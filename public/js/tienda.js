@@ -1,6 +1,7 @@
 let ProcesosTienda = {
     initTienda: function() {
         this.ListTienda()
+        this.countProductCar()
         this.ListCar()
         this.actualizarCantidad()
         this.EliminarProductoCar()
@@ -41,6 +42,20 @@ let ProcesosTienda = {
         }
     },
 
+    countProductCar: function() {
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = url + '/api/countProductCar';
+        request.open("GET", ajaxUrl, true);
+        request.setRequestHeader("Content-Type", "application/json");
+        request.send();
+        request.onreadystatechange = function() {
+            if (request.readyState == 4 && request.status == 200) {
+                let objData = JSON.parse(request.responseText);
+                $(".cantidad").html(objData);
+            }
+        }
+    },
+
     AgregarCarrito: function() {
         let self = this
         $(".agregarCarrito").click(function(e) {
@@ -77,7 +92,7 @@ let ProcesosTienda = {
                         type: "success",
                         confirmButtonText: 'Ok!'
                     })
-                    $(".cantidad").html(objData.cantidad);
+                    self.countProductCar()
                     self.ListCar()
                 } else {
                     let objData = JSON.parse(request.responseText);
@@ -107,7 +122,7 @@ let ProcesosTienda = {
                     objData.forEach(function(elem) {
 
                         option.push('<tr><td><a class="media">\
-							<a href="javascript:void(0)" class="text-dark"><img src="' + url + '/img/' + elem.image + '" alt="iMac" width="80" /> ' + elem.name + '</a>\
+							<a href="javascript:void(0)" class="text-dark"><img src="' + url + '/img/' + ((elem.image) ? elem.image : 'defaul.jpg') + '" alt="iMac" width="80" /> ' + elem.name + '</a>\
 						</a></td><td><div><input type="number" name="amount_car' + elem.id + '" id="amount_car" min="1" value="' + elem.amount + '" class="form-control" placeholder="1" data-control="' + elem.id + '" > <button type="button" class="btn btn-info d-none buton' + elem.id + '" name="update" id="update" data-control="' + elem.id + '"><i class="uil  uil-sync"></i></button><div></td><td ><i class="uil uil-trash-alt text-danger eliminarProducto" data-control="' + elem.id + '" style="cursor: pointer"> </i></td></tr>')
 
 
