@@ -32,10 +32,7 @@
                   <a class="nav-link active" aria-current="page" href="{{url('/productos')}}">Productos</a>
                </li>
             </ul>
-            <div class="d-flex me-3">
-               <i class="uil uil-shopping-cart-alt fs-3"></i>
-               <span class="text-dark cantidad">2</span>
-            </div>
+            
          </div>
       </div>
    </nav>

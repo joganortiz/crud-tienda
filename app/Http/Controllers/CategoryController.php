@@ -75,7 +75,7 @@ class CategoryController extends Controller
                 "name"          => $name,
                 "description"   => $description,
                 "status"        => $status,
-                "created_at"    => $this->helpers->fechaActual()
+                "created_at"    => $this->helpers->dateCurrent()
             );
 
             $resul = Category::insert($arrDataInser);
@@ -157,14 +157,14 @@ class CategoryController extends Controller
                 "name"          => $name,
                 "description"   => $description,
                 "status"        => $status,
-                "updated_at"    => $this->helpers->fechaActual()
+                "updated_at"    => $this->helpers->dateCurrent()
             );
 
-            $data =  DB::table('categories')
+            $result =  DB::table('categories')
                 ->where('id', '=', $id)
                 ->update($arrDataUpdate);
 
-            if ($data) { #validamos que la actualizacion se haya realizado de manera exitosa
+            if ($result) { #validamos que la actualizacion se haya realizado de manera exitosa
                 $arrResponse = array("mensaje" => "La categoria se actualizo de manera correcta");
                 $status = 200;
             } else {
@@ -196,7 +196,7 @@ class CategoryController extends Controller
             $arrResponse = array("mensaje" => "La categoria fue eliminada");
             $status = 200;
         } else {
-            $arrResponse = array("mensaje" => "Se presento un error al crear la categoria, intenta más tarde");
+            $arrResponse = array("mensaje" => "Se presento un error al eliminar la categoria, intenta más tarde");
             $status = 404;
         }
 

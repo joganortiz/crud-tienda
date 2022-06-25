@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use Illuminate\Support\Facades\Storage;
+
 class Helpers {
    public function strClean(string $strCadena = '')
    {
@@ -42,10 +44,23 @@ class Helpers {
       ->header('Content-Type', 'application/json');
    }
 
-   public function fechaActual()
+   public function dateCurrent()
    {
       date_default_timezone_set("America/Bogota");
       return date("Y-m-d H:i:s");
+   }
+
+   public function procesarImagen($img)
+   {
+      $direction =  '../public/img';
+      $partes = explode(";base64,", $img);
+      $extencion = explode("/", mime_content_type($img))[1];
+      $imagen_base64 = base64_decode($partes[1]);
+      $file_ = uniqid() . '.' . $extencion;
+      $file = $direction . '/'. $file_;
+      file_put_contents($file, $imagen_base64);
+
+      return $file_;
    }
 }
 

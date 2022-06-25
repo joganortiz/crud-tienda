@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,13 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 /**
- * Peticiones a la de crud Categorias
+ * Peticiones a Categorias
  */
-// Route::post('/categoria/add', [CategoryController::class, 'addCategory']);
-
-// Route::put('/categoria/edit/{id}', function () {
-//     echo "editar";
-//     exit;
-// });
-
 Route::apiResource('category', CategoryController::class);
+
+/**
+ * Peticiones a productos
+ */
+Route::apiResource('product', ProductController::class);
