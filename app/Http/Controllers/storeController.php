@@ -68,37 +68,41 @@ class storeController extends Controller
                 ->Where('id', $id)
                 ->where('delete', '1')
                 ->get();
-
-            if($existe){
-                $amount = $amount_car + $amount;
-                if ($amount > $data[0]->stock) {
-                    $arrResponse = array("mensaje" => "La cantidad supera el Stock del producto");
-                    $status = 400;
-                }else{
-                    $_SESSION["carrito"][$indiceArray]["amount"] = $amount;
-                    $arrResponse = array("mensaje" => "se agrego al carrito el producto");
-                    $status = 200;
-                }
-
+            
+            if($data[0]->stock<1){
+                $arrResponse = array("mensaje" => "No es posible realizar la venta, producto no cuenta con suficiente Stock");
+                $status = 400;
             }else{
-                $produCar = array(
-                    "id"        => $id,
-                    "amount"    => $amount,
-                    "name"      => $data[0]->name,
-                    "price"     => $data[0]->price,
-                    "weight"    => $data[0]->weight,
-                    "image"     => $data[0]->image
-                );
+                if($existe){
+                    $amount = $amount_car + $amount;
+                    if ($amount > $data[0]->stock) {
+                        $arrResponse = array("mensaje" => "La cantidad supera el Stock del producto");
+                        $status = 400;
+                    }else{
+                        $_SESSION["carrito"][$indiceArray]["amount"] = $amount;
+                        $arrResponse = array("mensaje" => "se agrego al carrito el producto");
+                        $status = 200;
+                    }
 
-                if($amount > $data[0]->stock){
-                    $arrResponse = array("mensaje" => "La cantidad supera el Stock del producto");
-                    $status = 400;
                 }else{
-                    $_SESSION["carrito"][] = $produCar;
-                    $arrResponse = array("mensaje" => "se agrego al carrito el producto");
-                    $status = 200;
-                }
+                    $produCar = array(
+                        "id"        => $id,
+                        "amount"    => $amount,
+                        "name"      => $data[0]->name,
+                        "price"     => $data[0]->price,
+                        "weight"    => $data[0]->weight,
+                        "image"     => $data[0]->image
+                    );
 
+                    if($amount > $data[0]->stock){
+                        $arrResponse = array("mensaje" => "La cantidad supera el Stock del producto");
+                        $status = 400;
+                    }else{
+                        $_SESSION["carrito"][] = $produCar;
+                        $arrResponse = array("mensaje" => "se agrego al carrito el producto");
+                        $status = 200;
+                    }
+                }
             }
         }
 
