@@ -8,6 +8,12 @@
    <title>Document</title>
    <link rel="stylesheet" href="{{ asset('css/iconos/css/unicons.css')}}">
    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+
+   <!-- Datatable -->
+   <link rel="stylesheet" type="text/css" href="{{ asset('js/datatables.net-bs4/css/dataTables.bootstrap4.css') }}">
+   <link rel="stylesheet" type="text/css" href=" {{ asset('js/datatables.net-bs4/css/responsive.dataTables.min.css') }}">
+
+   <link rel="stylesheet" type="" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 </head>
 
 <body>
@@ -26,10 +32,6 @@
                   <a class="nav-link active" aria-current="page" href="{{url('/categorias')}}">Categorias</a>
                </li>
             </ul>
-            <div class="d-flex me-3">
-               <i class="uil uil-shopping-cart-alt fs-3"></i>
-               <span class="text-dark cantidad">2</span>
-            </div>
          </div>
       </div>
    </nav>
