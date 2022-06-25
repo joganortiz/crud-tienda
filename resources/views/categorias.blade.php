@@ -3,7 +3,7 @@
    <div class="row p-3">
       <div class="col-lg-4 col-md-12 col-sm-12">
          <form name="formCategorias" id="formCategorias">
-            <input type="hidden" name="idCategoria" id="idCategoria">
+            <input type="hidden" name="idCategoria" id="idCategoria" value="">
             <div class="mb-1">
                <label class="form-label">Nombre:</label>
                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">

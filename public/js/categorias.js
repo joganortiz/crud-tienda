@@ -160,6 +160,7 @@ let ProcesosCategorias = {
                     })
 
                     document.getElementById("formCategorias").reset()
+                    $("input[name=idCategoria]").val('');
                 } else {
                     let objData = JSON.parse(request.responseText);
                     swal({

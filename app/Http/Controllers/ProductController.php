@@ -180,20 +180,7 @@ class ProductController extends Controller
         }
 
         if ($continue) {
-            if ($image != '') {
-                $data =  DB::table('products')
-                ->select('image')
-                ->Where('id', $id)
-                ->get();
-
-                $ruta = '../public/img/'. $data[0]->image;
-                if(file_exists($ruta)){
-                    unlink($ruta);
-                }
-
-                $image = $this->helpers->procesarImagen($image);
-            }
-
+            
             $arrDataUpdate = array(
                 "name"          => $name,
                 "reference"     => $reference,
@@ -206,6 +193,24 @@ class ProductController extends Controller
                 "updated_at"    => $date_registered
             );
 
+            $data =  DB::table('products')
+            ->select('image')
+            ->Where('id', $id)
+            ->get();
+
+            if ($image != '') {
+
+                $ruta = '../public/img/'. $data[0]->image;
+                if($data[0]->image != '' && file_exists($ruta)){
+                    unlink($ruta);
+                }
+
+                $arrDataUpdate["image"] = $this->helpers->procesarImagen($image);
+            }else{
+                $arrDataUpdate["image"] = $data[0]->image;
+
+            }
+            
             $result =  DB::table('products')
                 ->where('id', '=', $id)
                 ->update($arrDataUpdate);
